@@ -14,8 +14,22 @@
 // Input: list1 = [], list2 = [0]
 // Output: [0]
 
+//Cant use concat and sort :'(
+
+
 function mergeTwoLists(l1, l2){
-    return l1.concat(l2).sort((a,b) => a - b);
+    const mixed = [...l1, ...l2];
+    let merged = [];
+    let max;
+    while(merged.length < [...l1,...l2].length){
+        max = mixed[0];
+        for(let i = 0; i < mixed.length  ; i++){
+           if(mixed[i] > max) max = mixed[i];
+        }
+        merged = [max, ...merged]
+        mixed.splice(mixed.findIndex(n => n === max), 1);
+    }
+    return mixed;
 }
 
-//Cant use concat and sort :'(
+console.log(mergeTwoLists([], [0]));
